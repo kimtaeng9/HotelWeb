@@ -3,8 +3,7 @@ package com.example.hotel.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,8 +21,7 @@ public class User {
     private String email;
     private String phone;
     private String role;
-    private LocalDateTime createdAt;
+    private String password;
+    private LocalDate createdAt;
 
-    @OneToMany(mappedBy = "reservedUser")
-    private List<Room> reservations;
 }

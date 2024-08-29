@@ -1,0 +1,10 @@
+{{>layout/header}}
+
+<h1>Available Rooms</h1>
+<ul>
+    {{#availableRooms}}
+        <li>Room Type: {{roomType}}, Room Name: {{roomName}}, Price: {{price}}</li>
+    {{/availableRooms}}
+</ul>
+
+{{>layout/footer}}

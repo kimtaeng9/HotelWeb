@@ -2,8 +2,6 @@ package com.example.hotel.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -14,17 +12,14 @@ import java.time.LocalDateTime;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long room_id;
+    private Long roomId;
 
-    private String room_type;
-    private String room_name;
+    private String roomType;
+    private String roomName;
     private Long price;
 
-    @ManyToOne
-    @JoinColumn(name="reserved_user_id")
-    private User reservedUser;
+
     private String status;
-    private LocalDateTime created_at;
 
 
 }

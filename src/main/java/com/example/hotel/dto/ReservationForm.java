@@ -1,9 +1,16 @@
 package com.example.hotel.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.ToString;
+import lombok.Data;
 
-@ToString
-@AllArgsConstructor
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+@Data
 public class ReservationForm {
+    private Long id;
+    private String userId;
+    private String roomId;
+    private LocalDate checkInDate;
+    private LocalDate checkOutDate;
+    private String status;
+    private LocalDateTime createdAt;
 }
