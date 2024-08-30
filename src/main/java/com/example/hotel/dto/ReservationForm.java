@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 @Data
 public class ReservationForm {
     private Long id;
-    private String userId;
-    private String roomId;
+    private Long userId;
+    private Long roomId;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private String status;

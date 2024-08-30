@@ -1,0 +1,176 @@
+<style>
+    /* 웹 전체에 적용할 글씨체 */
+    body {
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;  /* 텍스트 색상 */
+        background-color: #f9f9f9;  /* 배경 색상 */
+        margin: 0;
+        padding: 0;
+    }
+
+    /* 제목 스타일 */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Playfair Display', serif;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    /* 버튼 스타일 */
+    .btn {
+        font-family: 'Noto Sans KR', sans-serif;
+        background-color: #b29060;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #a57f50;
+        color: #fff;
+    }
+
+    /* 헤더 스타일 */
+    nav.navbar {
+        background-color: #333;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    nav.navbar .navbar-brand, nav.navbar .nav-link {
+        color: #fff;
+    }
+
+    nav.navbar .nav-link:hover {
+        color: #b29060;
+    }
+
+    /* 푸터 스타일 */
+    .footer {
+        background-color: #222;
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    .footer .contact-info div {
+        margin: 0 20px;
+    }
+
+    /* 예약 섹션 스타일 */
+    .booking-container {
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        padding: 20px;
+        width: 80%;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .booking-container .form-label {
+        font-weight: bold;
+        color: #b29060;
+    }
+
+    .booking-container .form-control,
+    .booking-container .form-select {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    /* 예약 버튼 */
+    .booking-container .btn-primary {
+        background-color: #b29060;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .booking-container .btn-primary:hover {
+        background-color: #a57f50;
+    }
+    /* 기존 글로벌 스타일 유지 */
+
+    .form-control, .form-select {
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        padding: 10px;
+        width: 200px; /* 기본 너비를 200px로 설정하여 크기 조정 */
+    }
+
+    /* 더 구체적인 선택자 적용 예: 메인 예약 폼의 선택 박스 스타일 */
+    .main-booking-container .form-control,
+    .main-booking-container .form-select {
+        width: 200px; /* 성인과 소인 선택 박스의 너비 설정 */
+    }
+    .custom-search-form {
+        max-width: 900px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+        border: 1px solid #d3d3d3;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-search-form .form-label {
+        color: #555; /* Subtle text color for labels */
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .custom-search-form .form-control,
+    .custom-search-form .form-select {
+        width: 200px; /* Consistent width */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 5px 0;
+        transition: border-color 0.3s; /* Subtle transition */
+    }
+
+    .custom-search-form .form-control:focus,
+    .custom-search-form .form-select:focus {
+        border-color: #b29060; /* Focused border color */
+        box-shadow: 0 0 5px rgba(178, 144, 96, 0.5);
+    }
+
+    .custom-search-form .btn-gold {
+        background-color: #b29060;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .custom-search-form .btn-gold:hover {
+        background-color: #a07850; /* Hover effect */
+    }
+
+    @media (max-width: 768px) {
+        .custom-search-form .form-control,
+        .custom-search-form .form-select {
+            width: 100%; /* Full width on smaller screens */
+            margin-bottom: 10px;
+        }
+
+        .custom-search-form .btn-gold {
+            width: 100%;
+        }
+    }
+</style>

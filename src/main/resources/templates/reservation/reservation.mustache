@@ -1,10 +1,139 @@
 {{>layout/header}}
 
+<!-- 스타일 정의 -->
+<style>
+    body {
+        font-family: 'Noto Sans KR', sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 36px;
+        color: #b29060;
+        text-align: center;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+    }
+
+    .content-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .room-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 20px;
+        list-style: none;
+        padding: 0;
+        flex-grow: 1; /* 공간을 채우도록 설정 */
+    }
+
+    .room-card {
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .room-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .room-card h3 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .room-card p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .room-card .price {
+        font-size: 18px;
+        font-weight: bold;
+        color: #b29060;
+        margin-bottom: 20px;
+    }
+
+    .room-card button {
+        background-color: #b29060;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .room-card button:hover {
+        background-color: #a07850;
+    }
+
+    .stay-details {
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 250px; /* 고정된 너비 */
+        padding: 20px;
+        text-align: center;
+        align-self: flex-start; /* 상단 정렬 */
+    }
+
+    .stay-details h2 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+    .stay-details p {
+        font-size: 16px;
+        color: #666;
+        margin: 5px 0;
+    }
+</style>
+
 <h1>Available Rooms</h1>
-<ul>
-    {{#availableRooms}}
-        <li>Room Type: {{roomType}}, Room Name: {{roomName}}, Price: {{price}}</li>
-    {{/availableRooms}}
-</ul>
+
+<div class="content-container">
+    <ul class="room-list">
+        {{#availableRooms}}
+            <li class="room-card">
+                <form action="/reservation/detail" method="get">
+                    <h3>{{roomName}}</h3>
+                    <p>Room Type: {{roomType}}</p>
+                    <p class="price">Price: ${{price}}</p>
+                    <input type="hidden" name="roomType" value="{{roomType}}">
+                    <input type="hidden" name="roomName" value="{{roomName}}">
+                    <input type="hidden" name="price" value="{{price}}">
+                    <button type="submit">Reservation</button>
+                </form>
+            </li>
+        {{/availableRooms}}
+    </ul>
+
+    <div class="stay-details">
+        <h2>Your Stay</h2>
+        <p>CHECK IN: {{checkInDate}} After 15:00</p>
+        <p>CHECK OUT: {{checkOutDate}} Before 12:00</p>
+        <p>{{adults}} Adults</p>
+    </div>
+</div>
 
 {{>layout/footer}}

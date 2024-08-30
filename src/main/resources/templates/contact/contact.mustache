@@ -1,3 +1,118 @@
 {{>layout/header}}
-contac
+
+<style>
+    .contact-section {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+
+    .contact-section h2 {
+        font-size: 28px;
+        color: #b29060;
+        border-bottom: 2px solid #b29060;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .contact-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .contact-details, .international-numbers {
+        width: 48%;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .contact-details h4, .international-numbers h3 {
+        font-size: 18px;
+        color: #333;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .contact-details p, .international-numbers ul {
+        margin: 5px 0;
+    }
+
+    .international-numbers ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    .international-numbers ul li {
+        margin-bottom: 5px;
+    }
+</style>
+
+<div class="contact-section">
+    <h2>Contact Us</h2>
+
+    <div class="contact-container">
+        <div class="contact-details">
+            <h3>Hotel Services</h3>
+
+            <h4>General Enquiries</h4>
+            <p>Tel: +44 1234 567 890</p>
+            <p>Fax: +44 1234 567 891</p>
+            <p>Email: info@myhotel.com</p>
+
+            <h4>Concierge Service</h4>
+            <p>Tel: +44 1234 567 892</p>
+            <p>Email: concierge@myhotel.com</p>
+
+            <h4>Dining Reservations</h4>
+            <p>Tel: +44 1234 567 893</p>
+            <p>Email: dining@myhotel.com</p>
+
+            <h4>Spa Services</h4>
+            <p>Tel: +44 1234 567 894</p>
+            <p>Fax: +44 1234 567 895</p>
+            <p>Email: spa@myhotel.com</p>
+
+            <h4>Room Reservations</h4>
+            <p>For room reservations, please contact our Reservations Team:</p>
+            <p>Tel: +44 1234 567 896</p>
+            <p>Email: reservations@myhotel.com</p>
+        </div>
+
+        <div class="international-numbers">
+            <h3>International Toll-Free Numbers</h3>
+            <ul>
+                <li>Belgium, France, Germany, Ireland, Spain, and Switzerland: 00 800 7671 7671</li>
+                <li>USA/Canada: 1 866 599 6991</li>
+                <li>Japan: 001 800 7671 7671</li>
+                <li>Argentina: 0800 666 0224</li>
+                <li>Saudi Arabia: 800 844 3382</li>
+                <li>Brazil: 0800 891 7847</li>
+                <li>UAE: 800 441 3384</li>
+            </ul>
+
+            <h4>Opening Hours</h4>
+            <p>Monday - Friday: 8am - 10pm</p>
+            <p>Saturday - Sunday: 9am - 9pm</p>
+        </div>
+    </div>
+</div>
+
+<!-- Map Section -->
+<div id="map" style="width:100%;height:350px;"></div>
+<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=85e732404a0eb9fb9131399d2a184f7c"></script>
+
+<script>
+    var container = document.getElementById('map');
+    var options = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        level: 3
+    };
+
+    var map = new kakao.maps.Map(container, options);
+</script>
+
 {{>layout/footer}}

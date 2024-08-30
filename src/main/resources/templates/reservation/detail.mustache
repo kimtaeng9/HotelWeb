@@ -1,0 +1,108 @@
+{{>layout/header}}
+
+<!-- 스타일 정의 -->
+<style>
+    /* 페이지 컨테이너 스타일 */
+    .reservation-detail-container {
+        max-width: 900px;
+        margin: 50px auto;
+        background-color: rgba(255, 255, 255, 0.95); /* 반투명 흰색 배경 */
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: 'Noto Sans KR', sans-serif;
+        color: #333;
+    }
+
+    /* 제목 스타일 */
+    h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 36px;
+        color: #b29060;
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+
+    /* 섹션 제목 스타일 */
+    h3 {
+        font-family: 'Noto Sans KR', sans-serif;
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #b29060;
+        padding-bottom: 5px;
+    }
+
+    /* 텍스트 스타일 */
+    p {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    /* 버튼 스타일 */
+    .btn-reservation {
+        background-color: #b29060;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: block;
+        margin: 30px auto 0;
+        width: 200px;
+        text-align: center;
+    }
+
+    .btn-reservation:hover {
+        background-color: #a07850;
+    }
+
+    /* 반응형 디자인 */
+    @media (max-width: 768px) {
+        .reservation-detail-container {
+            padding: 20px;
+        }
+
+        .btn-reservation {
+            width: 100%;
+        }
+    }
+</style>
+
+<!-- 예약 세부 사항 -->
+<div class="reservation-detail-container">
+    <h1>Reservation Details</h1>
+
+    <div>
+        <h3>Room</h3>
+        <p><strong>Room Type:</strong> {{roomType}}</p>
+        <p><strong>Room Name:</strong> {{roomName}}</p>
+        <p><strong>Price:</strong> {{price}}</p>
+    </div>
+
+    <div>
+        <h3>User</h3>
+        <p><strong>Name:</strong> {{username}}</p>
+        <p><strong>Email:</strong> {{email}}</p>
+        <p><strong>Phone:</strong> {{phone}}</p>
+    </div>
+
+    <!-- 예약 버튼 -->
+    <form action="/reservation/confirm" method="post">
+        <!-- 숨겨진 입력 필드로 예약 정보를 전달 -->
+        <input type="hidden" name="roomType" value="{{roomType}}">
+        <input type="hidden" name="roomName" value="{{roomName}}">
+        <input type="hidden" name="price" value="{{price}}">
+        <input type="hidden" name="username" value="{{username}}">
+        <input type="hidden" name="email" value="{{email}}">
+        <input type="hidden" name="phone" value="{{phone}}">
+        <button type="submit" class="btn-reservation">Confirm Reservation</button>
+    </form>
+</div>
+
+{{>layout/footer}}

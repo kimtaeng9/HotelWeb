@@ -1,30 +1,58 @@
 {{>layout/header}}
-<h2>Deluxe Room</h2>
-<!-- carousel -->
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+{{>room/roomcss}}
+
+<div class="container-fluid">
+    <h2 class="room-title">Deluxe Room</h2>
+    <!-- carousel -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/r1.jpg" class="d-block w-100" alt="">
+            </div>
+            <div class="carousel-item">
+                <img src="/r1.jpg" class="d-block w-100" alt="">
+            </div>
+            <div class="carousel-item">
+                <img src="/r1.jpg" class="d-block w-100" alt="">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="/img1.jpg" class="d-block w-100" alt="">
-        </div>
-        <div class="carousel-item">
-            <img src="/img1.jpg" class="d-block w-100" alt="">
-        </div>
-        <div class="carousel-item">
-            <img src="/img1.jpg" class="d-block w-100" alt="">
+
+    <!-- Room Details Section -->
+    <div class="room-detail">
+        <h2>Deluxe Double Room</h2>
+        <p>Our Deluxe Double Room is perfect for families or friends traveling together. It features two comfortable double beds and a cozy seating area. The room's modern decor and soft lighting provide a warm and welcoming atmosphere.</p>
+        <p>Relax after a day of sightseeing in the well-appointed bathroom, equipped with a walk-in shower. The room also includes all the amenities you need for a comfortable stay, making it the ideal choice for a relaxing getaway.</p>
+
+        <h3>At a glance</h3>
+        <ul>
+            <li>2 Double Beds</li>
+            <li>Sleeps up to 4 people</li>
+            <li>Average size: 150 sq m / 1615 sq ft</li>
+            <li>Garden or city views</li>
+            <li>Complimentary Wi-Fi</li>
+            <li>24-hour room service</li>
+        </ul>
+
+        <div class="booking-info">
+            <p>To book, call us: +44 1234 567 892</p>
+            <p>or email: deluxe@myhotel.com</p>
+            <p>Check-in Time: 15:00<br>Check-out Time: 12:00</p>
         </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
 </div>
+
 {{>layout/footer}}

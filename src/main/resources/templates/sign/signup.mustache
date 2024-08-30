@@ -1,12 +1,36 @@
 {{>layout/header}}
-<form>
-    name
-    <input type="text" id="username">
-    email
-    <input type="text" id="email">
-    phone
-    <input type="text" id="phone">
-    <input type="password" id="password">
-    <button>SIGN UP</button>
-</form>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    SIGN UP
+                </div>
+                <div class="card-body">
+                    <form action="/signup" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Name</label>
+                            <input type="text" class="form-control" name="username" id="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" name="email" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" name="phone" id="phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" id="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">SIGN UP</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {{>layout/footer}}

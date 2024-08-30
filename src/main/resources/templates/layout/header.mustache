@@ -3,25 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          content="width=device-width, initial-scale=1.0">
     <title>myHotel</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* 추가적인 사용자 정의 스타일, 필요 시 추가 */
+        .reservation-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 600px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px; /* 패딩을 조금 더 주어 넓게 보이도록 설정 */
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            width: 90%; /* 너비를 90%로 설정하여 더 넓게 보이도록 조정 */
+            max-width: 800px; /* 최대 너비 설정 */
+        }
+        .reservation-container .form-label,
+        .reservation-container .form-control,
+        .reservation-container .form-select,
+        .reservation-container button {
+            font-size: 1.1rem; /* 글자 크기 조정 */
+            width: 100%; /* 입력 필드 및 버튼 너비 설정 */
+        }
+
+        .reservation-container .btn-primary {
+            width: auto; /* 버튼의 너비는 텍스트에 맞게 자동 조정 */
+        }
+        .navbar-nav .nav-item {
+            margin-right: 20px; /* 각 메뉴 항목 사이에 오른쪽 마진 추가 */
+        }
+        .navbar-nav.centered {
+            margin-left: auto;
+            margin-right: auto;
+        }
     </style>
+    {{> global}}
 </head>
 <body>
-<!-- nav -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">MyHotel</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="/">
+            <img src="/h.png" alt="MyHotel Logo" width="55">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- 가운데 정렬을 위한 mx-auto 클래스 추가 -->
-            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <!-- 가운데 메뉴 항목 정렬 -->
+            <ul class="navbar-nav centered mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">HOME</a>
                 </li>
@@ -36,12 +70,24 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/reservation">RESERVATION</a>
+                    <a class="nav-link active" href="/reservation/search">RESERVATION</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="/contact">CONTACT US</a>
                 </li>
             </ul>
+
+            <!-- 사용자 환영 메시지와 로그인/로그아웃 링크 -->
+            <span class="navbar-text me-3">
+                Welcome, {{username}}!
+            </span>
+            {{#isGuest}}
+                <a href="/sign/signin" class="btn btn-outline-primary me-2">Sign In</a>
+                <a href="/sign/signup" class="btn btn-primary">Sign Up</a>
+            {{/isGuest}}
+            {{^isGuest}}
+                <a href="/signout" class="btn btn-outline-danger">Sign Out</a>
+            {{/isGuest}}
         </div>
     </div>
 </nav>

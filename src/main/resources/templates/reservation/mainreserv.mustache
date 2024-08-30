@@ -1,30 +1,42 @@
-<!-- 예약 입력란 -->
-<div class="booking-container">
+<div class="main-booking-container">
     <form action="/reservation" method="get" class="d-flex align-items-center">
-        <div class="me-3">
-            <label for="checkin-date" class="form-label">체크인</label>
-            <input type="date" id="checkin-date" name="checkin-date" class="form-control" placeholder="날짜 선택">
+        <div class="form-group me-3">
+            <label for="checkin-date" class="form-label">CHECK IN</label>
+            <input type="date" id="checkin-date" name="checkin-date" class="form-control" >
         </div>
-        <div class="me-3">
-            <label for="checkout-date" class="form-label">체크아웃</label>
-            <input type="date" id="checkout-date" name= "checkout-date" class="form-control" placeholder="날짜 선택">
+        <div class="form-group me-3">
+            <label for="checkout-date" class="form-label">CHECK OUT</label>
+            <input type="date" id="checkout-date" name="checkout-date" class="form-control" >
         </div>
-        <div class="me-3">
-            <label for="adults" class="form-label">성인</label>
+        <div class="form-group me-3">
+            <label for="adults" class="form-label">Adults</label>
             <select name="adults" id="adults" class="form-select">
-                <option value="1">1명</option>
-                <option value="2" selected>2명</option>
-                <option value="3">3명</option>
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
             </select>
         </div>
-        <div class="me-3">
-            <label for="children" class="form-label">소인</label>
+       <!-- <div class="form-group me-3">
+            <label for="children" class="form-label">children</label>
             <select name="children" id="children" class="form-select">
-                <option value="0">선택</option>
-                <option value="1">1명</option>
-                <option value="2">2명</option>
+                <option value="0">-- select --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
             </select>
-        </div>
-        <button type="submit" class="btn btn-primary">객실 검색</button>
+        </div>-->
+        <button type="submit" class="btn btn-gold">Search</button>
     </form>
 </div>
+
+
+<script>
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+
+    const todayDate = `${yyyy}-${mm}-${dd}`;
+    document.getElementById('checkin-date').min = todayDate;
+    document.getElementById('checkout-date').min = todayDate;
+</script>
+
