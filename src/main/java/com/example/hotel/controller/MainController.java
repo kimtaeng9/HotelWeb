@@ -25,14 +25,14 @@ public class MainController {
 
     @GetMapping("/")
     public String showMainPage(HttpSession session, Model model) {
-        String username = (String) session.getAttribute("username");
+       /* String username = (String) session.getAttribute("username");
         if (username == null) {
             model.addAttribute("username", "Guest");
             model.addAttribute("isGuest", true);
         } else {
             model.addAttribute("username", username);
             model.addAttribute("isGuest", false);
-        }
+        }*/
         return "main";
     }
 

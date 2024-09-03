@@ -19,7 +19,6 @@ public class Room {
     private Long price;
 
 
-    private String status;
 
 
 }

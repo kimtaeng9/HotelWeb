@@ -30,13 +30,50 @@
 
 
 <script>
+    // 오늘 날짜 가져오기
     const today = new Date();
     const yyyy = today.getFullYear();
     const mm = String(today.getMonth() + 1).padStart(2, '0');
     const dd = String(today.getDate()).padStart(2, '0');
-
+    // 'YYYY-MM-DD' 형식으로 설정
     const todayDate = `${yyyy}-${mm}-${dd}`;
     document.getElementById('checkin-date').min = todayDate;
     document.getElementById('checkout-date').min = todayDate;
-</script>
+    // 내일 날짜 계산
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);  // 하루를 더함
+    const yyyyTomorrow = tomorrow.getFullYear();  // 내일의 연도
+    const mmTomorrow = String(tomorrow.getMonth() + 1).padStart(2, '0');  // 내일의 월
+    const ddTomorrow = String(tomorrow.getDate()).padStart(2, '0');  // 내일의 일
+    // 내일 날짜를 'YYYY-MM-DD' 형식으로 설정
+    const tomorrowDate = `${yyyyTomorrow}-${mmTomorrow}-${ddTomorrow}`;
 
+    // 체크인 날짜의 최소값과 기본값을 오늘 날짜로 설정
+    document.getElementById('checkin-date').min = todayDate;
+    document.getElementById('checkin-date').value = todayDate;
+
+    // 체크아웃 날짜의 최소값과 기본값을 내일 날짜로 설정
+    document.getElementById('checkout-date').min = tomorrowDate;
+    document.getElementById('checkout-date').value = tomorrowDate;
+
+    // 체크인 날짜 변경 시 체크아웃 날짜의 최소값 동적으로 업데이트
+    document.getElementById('checkin-date').addEventListener('change', function() {
+        const checkinDate = new Date(this.value);  // 선택한 체크인 날짜
+        const checkoutMinDate = new Date(checkinDate);
+        checkoutMinDate.setDate(checkinDate.getDate() + 1);  // 체크아웃 최소 날짜는 체크인 다음날
+
+        // 체크아웃 최소 날짜를 'YYYY-MM-DD' 형식으로 설정
+        const yyyyCheckout = checkoutMinDate.getFullYear();
+        const mmCheckout = String(checkoutMinDate.getMonth() + 1).padStart(2, '0');
+        const ddCheckout = String(checkoutMinDate.getDate()).padStart(2, '0');
+        const formattedCheckoutMinDate = `${yyyyCheckout}-${mmCheckout}-${ddCheckout}`;
+
+        // 체크아웃 날짜의 최소값을 설정
+        document.getElementById('checkout-date').min = formattedCheckoutMinDate;
+
+        // 만약 현재 체크아웃 날짜가 새 체크인 날짜 다음날보다 이른 경우, 체크아웃 날짜를 업데이트
+        if (document.getElementById('checkout-date').value <= this.value) {
+            document.getElementById('checkout-date').value = formattedCheckoutMinDate;
+        }
+    });
+</script>

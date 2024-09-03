@@ -15,4 +15,5 @@ public interface ReservationService {
     Reservation makeReservation(ReservationForm reservationForm);
 
 
+    void getUserIdFromResv(String username, ReservationForm reservationForm);
 }

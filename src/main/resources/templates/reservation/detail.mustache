@@ -80,9 +80,12 @@
 
     <div>
         <h3>Room</h3>
+        <p><strong>Check In:</strong> {{checkInDate}}</p>
+        <p><strong>Check Out:</strong> {{checkOutDate}}</p>
         <p><strong>Room Type:</strong> {{roomType}}</p>
         <p><strong>Room Name:</strong> {{roomName}}</p>
         <p><strong>Price:</strong> {{price}}</p>
+        <p><strong>adults:</strong> {{adults}}</p>
     </div>
 
     <div>
@@ -94,15 +97,25 @@
 
     <!-- 예약 버튼 -->
     <form action="/reservation/confirm" method="post">
-        <!-- 숨겨진 입력 필드로 예약 정보를 전달 -->
+        <!-- ReservationForm 관련 필드 -->
+        <input type="hidden" name="checkInDate" value="{{checkInDate}}">
+        <input type="hidden" name="checkOutDate" value="{{checkOutDate}}">
         <input type="hidden" name="roomType" value="{{roomType}}">
         <input type="hidden" name="roomName" value="{{roomName}}">
         <input type="hidden" name="price" value="{{price}}">
+        <input type="hidden" name="adults" value="{{adults}}">
+        <input type="hidden" name="roomId" value="{{roomId}}">
+
+
+        <!-- UserForm 관련 필드 -->
         <input type="hidden" name="username" value="{{username}}">
         <input type="hidden" name="email" value="{{email}}">
         <input type="hidden" name="phone" value="{{phone}}">
+
         <button type="submit" class="btn-reservation">Confirm Reservation</button>
     </form>
+
+
 </div>
 
 {{>layout/footer}}

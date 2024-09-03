@@ -1,16 +1,16 @@
--- room 데이터 삽입 (created_at 컬럼 제외)
-INSERT INTO room (room_id, room_type, room_name, price, status)
-VALUES
-    (1, 'Deluxe', 'Deluxe Room 101', 150.00, 'available'),
-    (2, 'Executive', 'Executive Suite 202', 250.00, 'reserved'),
-    (3, 'Presidential', 'Presidential Suite 303', 500.00, 'available');
-
--- users 데이터 삽입 (password 컬럼 제외)
-INSERT INTO users (username, email, password, phone, role) VALUES ('random_user', 'random1@example.com', '1', '123-456-7890', 'USER');
-
--- reservation 데이터 삽입
-INSERT INTO `reservation` (`id`, `user_id`, `room_id`, `check_in_date`, `check_out_date`, `status`, `created_at`)
-VALUES
-    (1, 1, 2, '2024-09-01', '2024-09-03', 'confirmed', CURRENT_TIMESTAMP),
-    (2, 2, 3, '2024-09-05', '2024-09-06', 'confirmed', CURRENT_TIMESTAMP),
-    (3, 3, 1, '2024-09-10', '2024-09-12', 'pending', CURRENT_TIMESTAMP);
+INSERT INTO reservation (user_id, room_id, adults, check_in_date, check_out_date, status, created_at) VALUES
+                                                                                                          (1, 1, 2, '2024-09-01', '2024-09-05', 'Booked', '2024-08-01'),
+                                                                                                          (2, 3, 1, '2024-09-10', '2024-09-12', 'Checked In', '2024-08-20'),
+                                                                                                          (3, 2, 4, '2024-09-15', '2024-09-18', 'Cancelled', '2024-08-25'),
+                                                                                                          (4, 5, 2, '2024-09-20', '2024-09-22', 'Booked', '2024-09-01');
+INSERT INTO room (room_type, room_name, price) VALUES
+                                                   ('Single', 'Cozy Corner', 100),
+                                                   ('Double', 'Sea View Retreat', 150),
+                                                   ('Suite', 'Luxury Suite', 300),
+                                                   ('Single', 'Budget Room', 80),
+                                                   ('Double', 'Mountain View', 200);
+INSERT INTO users (password, username, email, phone, role) VALUES
+                                                               ('1', 'john_doe', '1', '123-456-7890', 'guest'),
+                                                               ('password456', 'jane_smith', 'jane.smith@example.com', '234-567-8901', 'admin'),
+                                                               ('password789', 'michael_brown', 'michael.brown@example.com', '345-678-9012', 'guest'),
+                                                               ('password321', 'linda_jones', 'linda.jones@example.com', '456-789-0123', 'guest');

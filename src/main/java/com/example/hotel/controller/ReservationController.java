@@ -1,9 +1,12 @@
 package com.example.hotel.controller;
 
 import com.example.hotel.dto.ReservationForm;
+import com.example.hotel.dto.UserForm;
 import com.example.hotel.entity.Room;
 import com.example.hotel.entity.User;
+import com.example.hotel.repository.RoomRepository;
 import com.example.hotel.service.ReservationService;
+import com.example.hotel.service.RoomService;
 import com.example.hotel.service.SignService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,7 +27,13 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
     @Autowired
+    private RoomRepository roomRepository;
+
+    @Autowired
     private SignService signService;
+    @Autowired
+    private RoomService roomService;
+
 
     @ModelAttribute
     public void addCommonAttributes(HttpSession session, Model model) {
@@ -51,50 +59,85 @@ public class ReservationController {
             @RequestParam("checkout-date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate  checkOutDate,
             @RequestParam("adults") String adults,
            // @RequestParam("children") String children,
+            HttpSession session,
             Model model){
+        String username = (String) session.getAttribute("username");
+        User user = signService.findUserByUsername(username);
+
+        session.setAttribute("checkin-date", checkInDate);
+        session.setAttribute("checkout-date", checkOutDate);
+
         List<Room> availableRooms = reservationService.findAvailableRooms(checkInDate, checkOutDate);
-        System.out.println("Available rooms: " + availableRooms);
-        System.out.println("checkInDate: " + checkInDate);
+
+
         model.addAttribute("availableRooms", availableRooms);
         model.addAttribute("checkInDate", checkInDate);
         model.addAttribute("checkOutDate", checkOutDate);
         model.addAttribute("adults", adults);
-       // model.addAttribute("children", children);
         return "reservation/reservation";
     }
 
 
-   @GetMapping("/reservation/detail")
-   public String showReservationDetail(@RequestParam("roomType") String roomType,
-                                       @RequestParam("roomName") String roomName,
-                                       @RequestParam("price") String price,
-                                       Model model,
-                                       HttpSession session,
-                                       RedirectAttributes redirectAttributes) {
-       // 로그인 상태 확인
-       String username = (String) session.getAttribute("username");
+    @GetMapping("/reservation/detail")
+    public String showReservationDetail(@RequestParam("roomType") String roomType,
+                                        @RequestParam("roomName") String roomName,
+                                        @RequestParam("price") String price,
+                                        @RequestParam("adults") String adults,
+                                      //  @RequestParam("roomId") Long roomId,
+                                      //  @RequestParam("userId") Long userId,
+                                        Model model,
+                                        HttpSession session) {
 
-       if (username == null || username.equals("Guest")) {
-           return "redirect:/sign/signin";
-       }
-       // 사용자 정보 가져오기
-       User user = signService.findUserByUsername(username);
-       if (user != null) {
-           model.addAttribute("email", user.getEmail());
-           model.addAttribute("phone", user.getPhone());
-       }
-       System.out.println("roomType : " + roomType);
-       model.addAttribute("roomType", roomType);
-       model.addAttribute("roomName", roomName);
-       model.addAttribute("price", price);
-       return "reservation/detail";
-   }
-   // 예약 확정 페이지
-   @PostMapping("/reservation/confirm")
+            String username = (String) session.getAttribute("username");
+            if (username == null || username.equals("Guest")) {
+                return "redirect:/sign/signin";
+            }
+
+            User user = signService.findUserByUsername(username);
+            if (user != null) {
+                model.addAttribute("email", user.getEmail());
+                model.addAttribute("phone", user.getPhone());
+                model.addAttribute("userId", user.getId());
+            }
+
+             LocalDate checkInDate = (LocalDate) session.getAttribute("checkin-date");
+             LocalDate checkOutDate = (LocalDate) session.getAttribute("checkout-date");
+
+        Room room = roomService.getRoomByName(roomName);
+
+            model.addAttribute("roomType", roomType);
+            model.addAttribute("roomName", roomName);
+            model.addAttribute("price", price);
+            model.addAttribute("checkInDate", checkInDate);
+            model.addAttribute("checkOutDate", checkOutDate);
+            model.addAttribute("adults", adults);
+            model.addAttribute("roomId", room.getRoomId());
+            return "reservation/detail";
+
+    }
+    @PostMapping("/reservation/confirm")
     public String confirmReservation(@ModelAttribute ReservationForm reservationForm,
-                                     HttpSession session){
+                                     @ModelAttribute UserForm userForm,
+                                     Model model,
+                                     HttpSession session) {
+        System.out.println("예약확인");
+        System.out.println("Received ReservationForm: " + reservationForm);
+        System.out.println("Received UserForm: " + userForm);
+        System.out.println("Received ReservationForm.getRoomId(): " + reservationForm.getRoomId());
+
+
+        // 현재 세션에서 사용자 정보를 가져옵니다.
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            reservationService.getUserIdFromResv(username, reservationForm);
+        }
+
+
+        // 방 정보를 처리하고 예약 생성
         reservationService.makeReservation(reservationForm);
         return "reservation/confirm";
-   }
+    }
+
+
 
 }

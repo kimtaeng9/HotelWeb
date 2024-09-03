@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 @Data
 public class ReservationForm {
     private Long id;
@@ -13,4 +14,7 @@ public class ReservationForm {
     private LocalDate checkOutDate;
     private String status;
     private LocalDateTime createdAt;
+    private Long adults;
+
+
 }
