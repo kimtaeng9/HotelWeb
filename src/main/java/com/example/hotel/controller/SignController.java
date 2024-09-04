@@ -14,17 +14,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SignController {
+
     @Autowired
     private SignService signService;
+
     @ModelAttribute
     public void addCommonAttributes(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             model.addAttribute("username", "Guest");
             model.addAttribute("isGuest", true);
+            model.addAttribute("isAdmin", false);
+        } else if (username.equals("admin")) {
+            model.addAttribute("username", username);
+            model.addAttribute("isGuest", false);
+            model.addAttribute("isAdmin", true);
         } else {
             model.addAttribute("username", username);
             model.addAttribute("isGuest", false);
+            model.addAttribute("isAdmin", false);
         }
     }
 
@@ -43,7 +51,7 @@ public class SignController {
     }
 
     @PostMapping("/signin")
-    public String postSignin(@RequestParam("email") String email, 
+    public String postSignin(@RequestParam("email") String email,
                              @RequestParam("password") String password,
                              HttpSession session, Model model) {
         User user = signService.signIn(email, password);

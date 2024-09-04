@@ -15,9 +15,15 @@ public class RoomController {
         if (username == null) {
             model.addAttribute("username", "Guest");
             model.addAttribute("isGuest", true);
+            model.addAttribute("isAdmin", false);
+        } else if (username.equals("admin")) {
+            model.addAttribute("username", username);
+            model.addAttribute("isGuest", false);
+            model.addAttribute("isAdmin", true);
         } else {
             model.addAttribute("username", username);
             model.addAttribute("isGuest", false);
+            model.addAttribute("isAdmin", false);
         }
     }
 

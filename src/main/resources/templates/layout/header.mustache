@@ -41,6 +41,17 @@
             margin-left: auto;
             margin-right: auto;
         }
+        .table-responsive {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
     </style>
     {{> global}}
 </head>
@@ -75,6 +86,12 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/contact">CONTACT US</a>
                 </li>
+                {{#isAdmin}}
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/showReservList">MANAGE</a>
+                    </li>
+                {{/isAdmin}}
+
             </ul>
 
             <!-- 사용자 환영 메시지와 로그인/로그아웃 링크 -->

@@ -41,9 +41,15 @@ public class ReservationController {
         if (username == null) {
             model.addAttribute("username", "Guest");
             model.addAttribute("isGuest", true);
+            model.addAttribute("isAdmin", false);
+        } else if (username.equals("admin")) {
+            model.addAttribute("username", username);
+            model.addAttribute("isGuest", false);
+            model.addAttribute("isAdmin", true);
         } else {
             model.addAttribute("username", username);
             model.addAttribute("isGuest", false);
+            model.addAttribute("isAdmin", false);
         }
     }
 
@@ -130,6 +136,10 @@ public class ReservationController {
         String username = (String) session.getAttribute("username");
         if (username != null) {
             reservationService.getUserIdFromResv(username, reservationForm);
+            // Assume getUserIdFromResv sets the userId in reservationForm based on the session's username
+        } else {
+            // Handle case where user is not logged in
+            throw new IllegalStateException("User is not logged in or session is invalid");
         }
 
 

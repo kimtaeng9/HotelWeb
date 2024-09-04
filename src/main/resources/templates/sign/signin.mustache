@@ -17,8 +17,15 @@
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" name="password" id="password" required>
                         </div>
+                        {{#loginError}}
+                            <div class="alert alert-danger" role="alert">
+                                Invalid email or password
+                            </div>
+                        {{/loginError}}
                         <button type="submit" class="btn btn-dark w-100">SIGN IN</button>
-                        <a href="/sign/signup">SIGN UP</a>
+                        <div class="mt-3 text-center">
+                            <a href="/sign/signup" class="btn btn-outline-dark w-100 mt-2">SIGN UP</a>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -15,11 +15,21 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
-    private Long roomId;
+   // private Long userId;
+   // private Long roomId;
     private Long adults;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private String status;
     private LocalDate createdAt;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
+
 }

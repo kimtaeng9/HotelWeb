@@ -45,18 +45,26 @@ public class ReservationServiceImpl implements ReservationService{
     public Reservation makeReservation(ReservationForm reservationForm){
         // 1. 예약 객체 생성 및 설정
         Reservation reservation = new Reservation();
-        reservation.setUserId(reservationForm.getUserId());
+        User user = signService.findUserById(reservationForm.getUserId());
+        Room room = roomRepository.findById(reservationForm.getRoomId()).orElse(null);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found for the given ID: " + reservationForm.getUserId());
+        }
+        reservation.setUser(user);
+        reservation.setRoom(room);
+
+        // reservation.setUserId(reservationForm.getUserId());
         System.out.println("(Service)reservationForm.getUserId()"+reservationForm.getUserId());
-        reservation.setRoomId(reservationForm.getRoomId());
+      //  reservation.setRoomId(reservationForm.getRoomId());
         System.out.println("(Service)reservationForm.getRoomId())"+reservationForm.getRoomId());
         reservation.setCheckInDate(reservationForm.getCheckInDate());
         System.out.println("(Service)reservationForm.getCheckInDate())"+reservationForm.getCheckInDate());
         reservation.setCheckOutDate(reservationForm.getCheckOutDate());
         reservation.setAdults(reservationForm.getAdults());
         System.out.println("(Service)reservationForm.getAdults())"+reservationForm.getAdults());
-        reservation.setRoomId(reservationForm.getRoomId());
+       // reservation.setRoomId(reservationForm.getRoomId());
         System.out.println("(Service)reservationForm.getRoomId())"+reservationForm.getRoomId());
-        reservation.setStatus("reserved"); // confirm , pending, cancel
+        reservation.setStatus("confirmed"); // confirm , pending, cancel
         reservation.setCreatedAt(LocalDate.now());
 
 

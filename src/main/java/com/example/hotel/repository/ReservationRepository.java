@@ -13,12 +13,21 @@ import java.util.List;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-    @Query("SELECT r FROM Room r " +
+/* @Query("SELECT r FROM Room r " +
             "LEFT JOIN Reservation res ON r.roomId = res.roomId " +
             "AND (res.checkInDate <= :checkOutDate AND res.checkOutDate >= :checkInDate) " +
             "WHERE res.roomId IS NULL")
+ List<Room> findAvailableRooms(@Param("checkInDate") LocalDate checkInDate,
+                               @Param("checkOutDate") LocalDate checkOutDate);*/
+
+    @Query("SELECT r FROM Room r " +
+            "LEFT JOIN Reservation res ON r = res.room " +
+            "AND (res.checkInDate <= :checkOutDate AND res.checkOutDate >= :checkInDate) " +
+            "WHERE res.room IS NULL")
     List<Room> findAvailableRooms(@Param("checkInDate") LocalDate checkInDate,
                                   @Param("checkOutDate") LocalDate checkOutDate);
+
+
 }
 /*    // 새로운 예약 생성
     // 컨트롤러에서 makeReservaion호출하도록 변경함

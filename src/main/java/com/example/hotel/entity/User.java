@@ -19,5 +19,8 @@ public class User {
     private String email;
     private String phone;
     private String role;
+    public boolean isAdmin() {
+        return this.role.equals("ROLE_ADMIN");
+    }
 
 }

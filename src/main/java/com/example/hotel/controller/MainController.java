@@ -17,11 +17,34 @@ public class MainController {
         if (username == null) {
             model.addAttribute("username", "Guest");
             model.addAttribute("isGuest", true);
+            model.addAttribute("isAdmin", false);
+        } else if (username.equals("admin")) {
+            model.addAttribute("username", username);
+            model.addAttribute("isGuest", false);
+            model.addAttribute("isAdmin", true);
         } else {
             model.addAttribute("username", username);
             model.addAttribute("isGuest", false);
+            model.addAttribute("isAdmin", false);
         }
     }
+
+/*    // 로그인한 사용자 정보 조회
+    @GetMapping("/user")
+    public ResponseEntity user(@AuthenticationPrincipal UserDetails userDetails) {
+        return new ResponseEntity<>(userDetails.getUsername(), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/api1")
+    public ResponseEntity api1(){
+        return new ResponseEntity("api1",HttpStatus.OK);
+    }
+
+    @GetMapping("/api2")
+    public ResponseEntity api2(){
+        return new ResponseEntity("api1",HttpStatus.OK);
+    }*/
 
     @GetMapping("/")
     public String showMainPage(HttpSession session, Model model) {
@@ -41,7 +64,10 @@ public class MainController {
         String username = (String) session.getAttribute("username");
         return "contact/contact";
     }
-
+    @GetMapping("/accessDenied")
+    public String accessDenied() {
+        return "accessDenied";
+    }
 /*    @GetMapping("/reservation")
     public String showReservationPage() {
         return "reservation/reservation";

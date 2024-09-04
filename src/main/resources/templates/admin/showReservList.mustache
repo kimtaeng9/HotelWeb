@@ -1,0 +1,36 @@
+{{>layout/header}}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Reservation List</h1>
+
+    <!-- Reservations Table -->
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>User Email</th>
+                <th>Room Name</th>
+                <th>Adults</th>
+                <th>Check-In Date</th>
+                <th>Check-Out Date</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#reservations}}
+                <tr>
+                    <!-- 이메일을 클릭 가능하도록 링크 추가 -->
+                    <td><a href="/showUserInfo?email={{user.email}}">{{user.email}}</a></td>
+                    <td>{{room.roomName}}</td>
+                    <td>{{adults}}</td>
+                    <td>{{checkInDate}}</td>
+                    <td>{{checkOutDate}}</td>
+                    <td>{{status}}</td>
+                </tr>
+            {{/reservations}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{>layout/footer}}

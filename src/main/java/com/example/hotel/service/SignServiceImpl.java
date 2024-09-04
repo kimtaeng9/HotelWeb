@@ -6,10 +6,13 @@ import com.example.hotel.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class SignServiceImpl implements SignService{
     @Autowired // db와 상호작용
     private UserRepository userRepository;
+
+
 
     public User signUp(UserForm userForm) {
         User user = new User();
@@ -17,7 +20,7 @@ public class SignServiceImpl implements SignService{
         user.setUsername(userForm.getUsername());
         user.setPhone(userForm.getPhone());
         user.setPassword(userForm.getPassword());
-        user.setRole("USER"); // 기본 역할 설정
+        user.setRole("ROLE_USER");
         return userRepository.save(user);
     }
 
@@ -27,5 +30,11 @@ public class SignServiceImpl implements SignService{
     }
     public User signIn(String email, String password) {
         return userRepository.findByEmailAndPassword(email, password);
+    }
+
+    @Override
+    public User findUserById(Long userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found for the given ID: " + userId));
     }
 }
