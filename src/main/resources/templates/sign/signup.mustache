@@ -11,15 +11,15 @@
                     <form action="/signup" method="post">
                         <div class="mb-3">
                             <label for="username" class="form-label">Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control w-100" name="username" id="username" placeholder="Enter your name" required>
+                            <input type="text" class="form-control w-100" name="username" id="username" pattern="[가-힣]+" placeholder="Enter your name" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control w-100" name="email" id="email" placeholder="Enter your email" required>
+                            <input type="email" class="form-control w-100" name="email" id="email" pattern="[a-zA-Z0-9]+[@][a-zA-Z0-9]+[.]+[a-zA-Z]+[.]*[a-zA-Z]*" placeholder="Enter your email" required>
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control w-100" name="phone" id="phone" placeholder="Enter your phone number" required>
+                            <input type="text" class="form-control w-100" name="phone" id="phone" pattern="(010)-\d{3,4}-\d{4}"  placeholder="Enter your phone number" required>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password <span class="text-danger">*</span></label>

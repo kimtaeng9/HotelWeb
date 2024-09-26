@@ -1,0 +1,161 @@
+{{>layout/header}}
+
+<!-- 스타일 정의 -->
+<style>
+    /* H1 제목 스타일 */
+    h1 {
+        font-family: 'Playfair Display', serif; /* 세리프 폰트 적용 */
+        font-size: 36px; /* 크기 조정 */
+        color: #b29060; /* 고급스러운 색상 */
+        text-align: center; /* 중앙 정렬 */
+        margin-top: 50px; /* 상단 여백 */
+        margin-bottom: 30px; /* 하단 여백 */
+        letter-spacing: 2px; /* 글자 사이 간격 */
+        text-transform: uppercase; /* 대문자로 변환 */
+        position: relative; /* 위치 조정을 위해 */
+    }
+
+    /* 밑줄 효과 */
+    h1:after {
+        content: '';
+        display: block;
+        width: 80px; /* 밑줄 너비 */
+        height: 3px; /* 밑줄 두께 */
+        background-color: #b29060; /* 밑줄 색상 */
+        margin: 10px auto 0; /* 위치 조정 */
+    }
+
+    /* 예약 폼 스타일 */
+    .main-booking-container {
+        max-width: 900px; /* 너비 조정 */
+        margin: 50px auto; /* 중앙 정렬 */
+        background-color: rgba(255, 255, 255, 0.9); /* 반투명 흰색 배경 */
+        border-radius: 10px; /* 둥근 모서리 */
+        padding: 30px; /* 내부 패딩 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    }
+
+    .form-group {
+        margin-bottom: 20px; /* 요소 사이 간격 */
+    }
+
+    .form-label {
+        font-weight: bold;
+        font-size: 16px;
+        color: #333;
+        display: block; /* 라벨을 블록 요소로 표시 */
+        margin-bottom: 5px; /* 라벨과 필드 사이 간격 */
+    }
+
+    .form-control, .form-select {
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        padding: 10px;
+        width: 200px; /* 입력 필드 너비 */
+    }
+
+    .btn-gold {
+        background-color: #b29060;
+        color: white;
+        border: none;
+        font-weight: bold;
+        padding: 10px 30px; /* 버튼 패딩 */
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+        margin-left: auto; /* 버튼을 오른쪽 끝으로 이동 */
+    }
+
+    .btn-gold:hover {
+        background-color: #a07850;
+    }
+
+    /* 반응형 디자인 */
+    @media (max-width: 768px) {
+        .form-control, .form-select {
+            width: 100%; /* 모바일에서 필드가 전체 너비를 차지하도록 */
+            margin-bottom: 10px;
+        }
+
+        .btn-gold {
+            width: 100%;
+        }
+    }
+</style>
+
+<h1>Reservation</h1>
+
+<div class="main-booking-container custom-search-form">
+    <form action="/reservation" method="get" class="d-flex align-items-center">
+        <div class="form-group me-3">
+            <label for="checkin-date" class="form-label">CHECK IN</label>
+            <input type="date" id="checkin-date" name="checkin-date" class="form-control">
+        </div>
+        <div class="form-group me-3">
+            <label for="checkout-date" class="form-label">CHECK OUT</label>
+            <input type="date" id="checkout-date" name="checkout-date" class="form-control">
+        </div>
+        <div class="form-group me-3">
+            <label for="adults" class="form-label">Adults</label>
+            <select name="adults" id="adults" class="form-select">
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-gold">Search</button>
+    </form>
+</div>
+
+<script>
+    // 오늘 날짜 가져오기
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    // 'YYYY-MM-DD' 형식으로 설정
+    const todayDate = `${yyyy}-${mm}-${dd}`;
+    document.getElementById('checkin-date').min = todayDate;
+    document.getElementById('checkout-date').min = todayDate;
+    // 내일 날짜 계산
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);  // 하루를 더함
+    const yyyyTomorrow = tomorrow.getFullYear();  // 내일의 연도
+    const mmTomorrow = String(tomorrow.getMonth() + 1).padStart(2, '0');  // 내일의 월
+    const ddTomorrow = String(tomorrow.getDate()).padStart(2, '0');  // 내일의 일
+    // 내일 날짜를 'YYYY-MM-DD' 형식으로 설정
+    const tomorrowDate = `${yyyyTomorrow}-${mmTomorrow}-${ddTomorrow}`;
+
+    // 체크인 날짜의 최소값과 기본값을 오늘 날짜로 설정
+    document.getElementById('checkin-date').min = todayDate;
+    document.getElementById('checkin-date').value = todayDate;
+
+    // 체크아웃 날짜의 최소값과 기본값을 내일 날짜로 설정
+    document.getElementById('checkout-date').min = tomorrowDate;
+    document.getElementById('checkout-date').value = tomorrowDate;
+
+    // 체크인 날짜 변경 시 체크아웃 날짜의 최소값 동적으로 업데이트
+    document.getElementById('checkin-date').addEventListener('change', function() {
+        const checkinDate = new Date(this.value);  // 선택한 체크인 날짜
+        const checkoutMinDate = new Date(checkinDate);
+        checkoutMinDate.setDate(checkinDate.getDate() + 1);  // 체크아웃 최소 날짜는 체크인 다음날
+
+        // 체크아웃 최소 날짜를 'YYYY-MM-DD' 형식으로 설정
+        const yyyyCheckout = checkoutMinDate.getFullYear();
+        const mmCheckout = String(checkoutMinDate.getMonth() + 1).padStart(2, '0');
+        const ddCheckout = String(checkoutMinDate.getDate()).padStart(2, '0');
+        const formattedCheckoutMinDate = `${yyyyCheckout}-${mmCheckout}-${ddCheckout}`;
+
+        // 체크아웃 날짜의 최소값을 설정
+        document.getElementById('checkout-date').min = formattedCheckoutMinDate;
+
+        // 만약 현재 체크아웃 날짜가 새 체크인 날짜 다음날보다 이른 경우, 체크아웃 날짜를 업데이트
+        if (document.getElementById('checkout-date').value <= this.value) {
+            document.getElementById('checkout-date').value = formattedCheckoutMinDate;
+        }
+    });
+</script>
+
+{{>layout/footer}}

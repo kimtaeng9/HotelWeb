@@ -52,54 +52,55 @@
 </style>
 
 <div class="contact-section">
-    <h2>Contact Us</h2>
+    <h2>문의하기</h2>
 
     <div class="contact-container">
         <div class="contact-details">
-            <h3>Hotel Services</h3>
+            <h3>호텔 서비스</h3>
 
-            <h4>General Enquiries</h4>
-            <p>Tel: +44 1234 567 890</p>
-            <p>Fax: +44 1234 567 891</p>
-            <p>Email: info@myhotel.com</p>
+            <h4>일반 문의</h4>
+            <p>전화: +82 1234 567 890</p>
+            <p>팩스: +82 1234 567 891</p>
+            <p>이메일: info@myhotel.co.kr</p>
 
-            <h4>Concierge Service</h4>
-            <p>Tel: +44 1234 567 892</p>
-            <p>Email: concierge@myhotel.com</p>
+            <h4>컨시어지 서비스</h4>
+            <p>전화: +82 1234 567 892</p>
+            <p>이메일: concierge@myhotel.co.kr</p>
 
-            <h4>Dining Reservations</h4>
-            <p>Tel: +44 1234 567 893</p>
-            <p>Email: dining@myhotel.com</p>
+            <h4>다이닝 예약</h4>
+            <p>전화: +82 1234 567 893</p>
+            <p>이메일: dining@myhotel.co.kr</p>
 
-            <h4>Spa Services</h4>
-            <p>Tel: +44 1234 567 894</p>
-            <p>Fax: +44 1234 567 895</p>
-            <p>Email: spa@myhotel.com</p>
+            <h4>스파 서비스</h4>
+            <p>전화: +82 1234 567 894</p>
+            <p>팩스: +82 1234 567 895</p>
+            <p>이메일: spa@myhotel.co.kr</p>
 
-            <h4>Room Reservations</h4>
-            <p>For room reservations, please contact our Reservations Team:</p>
-            <p>Tel: +44 1234 567 896</p>
-            <p>Email: reservations@myhotel.com</p>
+            <h4>객실 예약</h4>
+            <p>객실 예약 문의는 예약팀으로 연락해 주세요:</p>
+            <p>전화: +82 1234 567 896</p>
+            <p>이메일: reservations@myhotel.co.kr</p>
         </div>
 
         <div class="international-numbers">
-            <h3>International Toll-Free Numbers</h3>
+            <h3>국제 무료 전화번호</h3>
             <ul>
-                <li>Belgium, France, Germany, Ireland, Spain, and Switzerland: 00 800 7671 7671</li>
-                <li>USA/Canada: 1 866 599 6991</li>
-                <li>Japan: 001 800 7671 7671</li>
-                <li>Argentina: 0800 666 0224</li>
-                <li>Saudi Arabia: 800 844 3382</li>
-                <li>Brazil: 0800 891 7847</li>
-                <li>UAE: 800 441 3384</li>
+                <li>벨기에, 프랑스, 독일, 아일랜드, 스페인, 스위스: 00 800 7671 7671</li>
+                <li>미국/캐나다: 1 866 599 6991</li>
+                <li>일본: 001 800 7671 7671</li>
+                <li>아르헨티나: 0800 666 0224</li>
+                <li>사우디아라비아: 800 844 3382</li>
+                <li>브라질: 0800 891 7847</li>
+                <li>아랍에미리트: 800 441 3384</li>
             </ul>
 
-            <h4>Opening Hours</h4>
-            <p>Monday - Friday: 8am - 10pm</p>
-            <p>Saturday - Sunday: 9am - 9pm</p>
+            <h4>운영 시간</h4>
+            <p>월요일 - 금요일: 오전 8시 - 오후 10시</p>
+            <p>토요일 - 일요일: 오전 9시 - 오후 9시</p>
         </div>
     </div>
 </div>
+
 
 <!-- Map Section -->
 <div id="map" style="width:100%;height:350px;"></div>
@@ -113,6 +114,11 @@
     };
 
     var map = new kakao.maps.Map(container, options);
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: new kakao.maps.LatLng(33.450701, 126.570667)
+    });
+    marker.setMap(map);
 </script>
 
 {{>layout/footer}}
