@@ -54,7 +54,7 @@ public class MyController {
         return "/user/myPage";
     }
 
-    @GetMapping("/myReservation")
+    @GetMapping("/myReservations")
     public String myReservation(HttpSession session, Model model) {
         String email = (String) session.getAttribute("email");
         User user = userService.findByUserEmail(email);

@@ -20,6 +20,11 @@
                 <td>{{checkOutDate}}</td>
                 <td>{{room.roomName}}</td>
                 <td>{{status}}</td>
+                <td>
+                    <form action="/reservation/delete/{{id}}" method="post">
+                        <button type="submit" class="btn btn-danger">취소</button>
+                    </form>
+                </td>
             </tr>
         {{/reservations}}
         </tbody>

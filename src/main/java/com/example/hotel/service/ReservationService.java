@@ -14,4 +14,5 @@ public interface ReservationService {
     Reservation makeReservation(ReservationForm reservationForm);
     void getUserIdFromResv(String username, ReservationForm reservationForm);
     List<Reservation> getReservationsByUser(Long userId); // 이메일로 예약자 찾기
+    void deleteReservation(Long reservationId);
 }

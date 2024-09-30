@@ -2,6 +2,7 @@ package com.example.hotel.controller;
 
 import com.example.hotel.dto.ReservationForm;
 import com.example.hotel.dto.UserForm;
+import com.example.hotel.entity.Reservation;
 import com.example.hotel.entity.Room;
 import com.example.hotel.entity.User;
 import com.example.hotel.repository.RoomRepository;
@@ -13,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -31,9 +29,9 @@ public class ReservationController {
 
     @Autowired
     private SignService signService;
+
     @Autowired
     private RoomService roomService;
-
 
     @ModelAttribute
     public void addCommonAttributes(HttpSession session, Model model) {
@@ -53,10 +51,17 @@ public class ReservationController {
         }
     }
 
+    @PostMapping("/reservation/delete/{id}")
+    public String deleteReservation(HttpSession session, @PathVariable Long id) {
+        reservationService.deleteReservation(id);
+        return "redirect:/myReservations";
+    }
+
     @GetMapping("/reservation/search")
     public String reservation() {
         return "reservation/search";
     }
+
     // 날짜로 예약가능한 방조회
     @GetMapping("/reservation")
     public String reservation(
@@ -75,14 +80,12 @@ public class ReservationController {
 
         List<Room> availableRooms = reservationService.findAvailableRooms(checkInDate, checkOutDate);
 
-
         model.addAttribute("availableRooms", availableRooms);
         model.addAttribute("checkInDate", checkInDate);
         model.addAttribute("checkOutDate", checkOutDate);
         model.addAttribute("adults", adults);
         return "reservation/reservation";
     }
-
 
     @GetMapping("/reservation/detail")
     public String showReservationDetail(@RequestParam("roomType") String roomType,
@@ -119,8 +122,8 @@ public class ReservationController {
             model.addAttribute("adults", adults);
             model.addAttribute("roomId", room.getRoomId());
             return "reservation/detail";
-
     }
+
     @PostMapping("/reservation/confirm")
     public String confirmReservation(@ModelAttribute ReservationForm reservationForm,
                                      @ModelAttribute UserForm userForm,
@@ -131,17 +134,13 @@ public class ReservationController {
         System.out.println("Received UserForm: " + userForm);
         System.out.println("Received ReservationForm.getRoomId(): " + reservationForm.getRoomId());
 
-
         // 현재 세션에서 사용자 정보를 가져옵니다.
         String username = (String) session.getAttribute("username");
         if (username != null) {
             reservationService.getUserIdFromResv(username, reservationForm);
-            // Assume getUserIdFromResv sets the userId in reservationForm based on the session's username
         } else {
-            // Handle case where user is not logged in
             throw new IllegalStateException("User is not logged in or session is invalid");
         }
-
 
         // 방 정보를 처리하고 예약 생성
         reservationService.makeReservation(reservationForm);
