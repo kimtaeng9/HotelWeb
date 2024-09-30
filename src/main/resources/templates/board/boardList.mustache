@@ -1,0 +1,15 @@
+{{>layout/header}}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">User Information</h1>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">{{userInfo.username}}</h5>
+            <p class="card-text"><strong>Email:</strong> {{userInfo.email}}</p>
+            <p class="card-text"><strong>Phone:</strong> {{userInfo.phone}}</p>
+            <p class="card-text"><strong>Role:</strong> {{userInfo.role}}</p>
+        </div>
+    </div>
+</div>
+
+{{>layout/footer}}

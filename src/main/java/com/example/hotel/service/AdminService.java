@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface AdminService {
     List<Reservation> getAllReservations();
-
     User getUserInfo(String email);
 }

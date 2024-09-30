@@ -27,7 +27,6 @@ public class RoomController {
         }
     }
 
-
     @GetMapping("/room/deluxe")
     public String showDeluxeRoom(HttpSession session) {
         String username = (String) session.getAttribute("username");

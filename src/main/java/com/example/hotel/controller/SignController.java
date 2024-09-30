@@ -38,12 +38,14 @@ public class SignController {
 
     @GetMapping("/sign/signin")
     public String getSignin() {
-        return "/sign/signin"; // 메인 페이지로 연결될 경우
+        return "/sign/signin";
     }
+
     @GetMapping("/sign/signup")
     public String getSignup() {
-        return "/sign/signup"; // 메인 페이지로 연결될 경우
+        return "/sign/signup";
     }
+
     @PostMapping("/signup")
     public String postSignup(@ModelAttribute UserForm userForm) {
         signService.signUp(userForm);
@@ -56,7 +58,8 @@ public class SignController {
                              HttpSession session, Model model) {
         User user = signService.signIn(email, password);
         if (user != null) {
-            session.setAttribute("username", user.getUsername());
+            session.setAttribute("username", user.getUsername()); // 세션에 username 저장
+            session.setAttribute("email", user.getEmail()); // 세션에 email 저장
             session.setAttribute("isGuest", false); // 로그인 상태 설정
             return "redirect:/";  // 로그인 후 메인 페이지로 이동
         } else {
@@ -64,13 +67,11 @@ public class SignController {
             return "/sign/signin";
         }
     }
+
     @GetMapping("/signout")
     public String logout(HttpSession session) {
         // 세션에서 모든 사용자 정보 제거
         session.invalidate(); // 세션 무효화
-
         return "redirect:/";
     }
-
-
 }

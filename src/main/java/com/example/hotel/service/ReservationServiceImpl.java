@@ -43,34 +43,23 @@ public class ReservationServiceImpl implements ReservationService{
     @Override // 새로운 예약 생성
     @Transactional
     public Reservation makeReservation(ReservationForm reservationForm){
-        // 1. 예약 객체 생성 및 설정
         Reservation reservation = new Reservation();
         User user = signService.findUserById(reservationForm.getUserId());
         Room room = roomRepository.findById(reservationForm.getRoomId()).orElse(null);
-        if (user == null) {
-            throw new IllegalArgumentException("User not found for the given ID: " + reservationForm.getUserId());
-        }
         reservation.setUser(user);
         reservation.setRoom(room);
-
-        // reservation.setUserId(reservationForm.getUserId());
-        System.out.println("(Service)reservationForm.getUserId()"+reservationForm.getUserId());
-      //  reservation.setRoomId(reservationForm.getRoomId());
-        System.out.println("(Service)reservationForm.getRoomId())"+reservationForm.getRoomId());
         reservation.setCheckInDate(reservationForm.getCheckInDate());
-        System.out.println("(Service)reservationForm.getCheckInDate())"+reservationForm.getCheckInDate());
         reservation.setCheckOutDate(reservationForm.getCheckOutDate());
         reservation.setAdults(reservationForm.getAdults());
-        System.out.println("(Service)reservationForm.getAdults())"+reservationForm.getAdults());
-       // reservation.setRoomId(reservationForm.getRoomId());
-        System.out.println("(Service)reservationForm.getRoomId())"+reservationForm.getRoomId());
         reservation.setStatus("confirmed"); // confirm , pending, cancel
         reservation.setCreatedAt(LocalDate.now());
 
-
-        // 3. 예약을 db에 저장
         Reservation savedReservation = reservationRepository.save(reservation);
-        System.out.println("(Service)Reservation Id: " + savedReservation.getId());
         return savedReservation;
+    }
+
+    @Override
+    public List<Reservation> getReservationsByUser(Long userId) {
+        return reservationRepository.findByUserId(userId);
     }
 }

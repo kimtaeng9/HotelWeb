@@ -16,10 +16,8 @@ import java.util.List;
 @Controller
 public class AdminController {
 
-
     @Autowired
     private AdminService adminService;
-
 
     @ModelAttribute
     public void addCommonAttributes(HttpSession session, Model model) {
@@ -51,7 +49,6 @@ public class AdminController {
         return "admin/showReservList";
     }
 
-
     @GetMapping("/showUserInfo")
     public String showUserInfo(HttpSession session, Model model, @RequestParam String email) {
         String username = (String) session.getAttribute("username");
@@ -63,8 +60,5 @@ public class AdminController {
 
         return "admin/showUserInfo"; // 적절한 뷰 이름으로 변경
     }
-
-
-
 
 }

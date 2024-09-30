@@ -18,8 +18,4 @@ public class Room {
     private String roomType;
     private String roomName;
     private Long price;
-
-
-
-
 }

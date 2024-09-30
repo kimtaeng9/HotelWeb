@@ -59,7 +59,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">
-            <img src="/h.png" alt="MyHotel Logo" width="55">
+            <img src="/logo.png" alt="MyHotel Logo" width="55">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -86,22 +86,39 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/contact">CONTACT US</a>
                 </li>
+
                 {{#isAdmin}}
                     <li class="nav-item">
                         <a class="nav-link active" href="/showReservList">MANAGE</a>
                     </li>
                 {{/isAdmin}}
-
             </ul>
-
             <!-- 사용자 환영 메시지와 로그인/로그아웃 링크 -->
-            <span class="navbar-text me-3">
-                Welcome, {{username}}!
-            </span>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="navbar-text me-3">
+                        Welcome, {{username}}!
+                    </span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {{^isGuest}}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/myPage">MY PAGE</a>
+                        </li>
+                    {{/isGuest}}
+                    {{^isGuest}}
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/myReservation">MY RESERVATION</a>
+                        </li>
+                    {{/isGuest}}
+                </ul>
+            </li>
             {{#isGuest}}
                 <a href="/sign/signin" class="btn btn-outline-primary me-2">Sign In</a>
                 <a href="/sign/signup" class="btn btn-primary">Sign Up</a>
             {{/isGuest}}
+
             {{^isGuest}}
                 <a href="/signout" class="btn btn-outline-danger">Sign Out</a>
             {{/isGuest}}

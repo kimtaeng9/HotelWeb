@@ -7,6 +7,4 @@ public class RoomForm {
     private String roomType;
     private String roomName;
     private Long price;
-
-
 }

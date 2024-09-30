@@ -1,0 +1,30 @@
+{{>layout/header}}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">My Reservation</h1>
+    <h2>나의 예약 목록</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>체크인 날짜</th>
+            <th>체크아웃 날짜</th>
+            <th>객실 이름</th>
+            <th>예약 상태</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#reservations}}
+            <tr>
+                <td>{{checkInDate}}</td>
+                <td>{{checkOutDate}}</td>
+                <td>{{room.roomName}}</td>
+                <td>{{status}}</td>
+            </tr>
+        {{/reservations}}
+        </tbody>
+    </table>
+
+</div>
+
+{{>layout/footer}}
