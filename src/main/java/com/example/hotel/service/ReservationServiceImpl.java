@@ -10,11 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.time.LocalDate;
 import java.util.List;
 @Service
 public class ReservationServiceImpl implements ReservationService{
-    @Autowired // db와 상호작용
+    @Autowired
     private ReservationRepository reservationRepository;
 
     @Autowired
@@ -26,10 +27,10 @@ public class ReservationServiceImpl implements ReservationService{
     @Autowired
     private SignService signService;
 
-    @Override // 모든 예약 조회
+    @Override
     public List<Room> findAvailableRooms(LocalDate checkInDate, LocalDate checkOutDate) {
         List<Room> rooms = reservationRepository.findAvailableRooms(checkInDate, checkOutDate);
-        System.out.println("(Service)Rooms from repository: " + rooms);
+
         return rooms;
     }
 
@@ -54,16 +55,17 @@ public class ReservationServiceImpl implements ReservationService{
         reservation.setStatus("confirmed"); // confirm , pending, cancel
         reservation.setCreatedAt(LocalDate.now());
 
-        Reservation savedReservation = reservationRepository.save(reservation);
-        return savedReservation;
+        Long totalPrice = roomService.getTotalPrice(reservation.getRoom().getRoomId(), reservationForm.getCheckInDate(), reservationForm.getCheckOutDate());
+        reservation.setTotalPrice(totalPrice);
+        return reservationRepository.save(reservation);
     }
 
-    @Override
+    @Override // 해당 유저PK로 예약목록
     public List<Reservation> getReservationsByUser(Long userId) {
         return reservationRepository.findByUserId(userId);
     }
 
-    @Override
+    @Override // 예약삭제
     public void deleteReservation(Long reservationId) {
         reservationRepository.deleteById(reservationId);
     }

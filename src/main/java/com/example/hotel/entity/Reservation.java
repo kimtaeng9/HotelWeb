@@ -22,6 +22,7 @@ public class Reservation {
     private LocalDate checkOutDate;
     private String status;
     private LocalDate createdAt;
+    private Long totalPrice;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)

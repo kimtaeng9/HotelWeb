@@ -76,20 +76,20 @@
 
 <!-- 예약 세부 사항 -->
 <div class="reservation-detail-container">
-    <h1>Reservation Details</h1>
+    <h1>Reservation Information</h1>
 
     <div>
-        <h3>Room</h3>
-        <p><strong>Check In:</strong> {{checkInDate}}</p>
-        <p><strong>Check Out:</strong> {{checkOutDate}}</p>
+        <h3>Your Stay</h3>
+        <p><strong>Check In:</strong> {{checkInDate}} After 15:00</p>
+        <p><strong>Check Out:</strong> {{checkOutDate}} Before 12:00</p>
         <p><strong>Room Type:</strong> {{roomType}}</p>
         <p><strong>Room Name:</strong> {{roomName}}</p>
-        <p><strong>Price:</strong> {{price}}</p>
         <p><strong>adults:</strong> {{adults}}</p>
+        <p>TOTAL PRICE: ${{totalPrice}}</p>
     </div>
 
     <div>
-        <h3>User</h3>
+        <h3>Your Info</h3>
         <p><strong>Name:</strong> {{username}}</p>
         <p><strong>Email:</strong> {{email}}</p>
         <p><strong>Phone:</strong> {{phone}}</p>

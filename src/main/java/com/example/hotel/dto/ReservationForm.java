@@ -15,4 +15,5 @@ public class ReservationForm {
     private String status;
     private LocalDateTime createdAt;
     private Long adults;
+    private Long totalPrice;
 }

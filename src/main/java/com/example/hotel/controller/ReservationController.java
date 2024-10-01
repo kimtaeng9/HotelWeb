@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 @Controller
 public class ReservationController {
 
@@ -51,7 +53,7 @@ public class ReservationController {
         }
     }
 
-    @PostMapping("/reservation/delete/{id}")
+    @PostMapping("/reservation/delete/{id}") // 예약 삭제
     public String deleteReservation(HttpSession session, @PathVariable Long id) {
         reservationService.deleteReservation(id);
         return "redirect:/myReservations";
@@ -70,6 +72,7 @@ public class ReservationController {
             @RequestParam("checkout-date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate  checkOutDate,
             @RequestParam("adults") String adults,
            // @RequestParam("children") String children,
+           // @RequestParam("price") String price,
             HttpSession session,
             Model model){
         String username = (String) session.getAttribute("username");
@@ -78,8 +81,8 @@ public class ReservationController {
         session.setAttribute("checkin-date", checkInDate);
         session.setAttribute("checkout-date", checkOutDate);
 
-        List<Room> availableRooms = reservationService.findAvailableRooms(checkInDate, checkOutDate);
 
+        List<Room> availableRooms = reservationService.findAvailableRooms(checkInDate, checkOutDate);
         model.addAttribute("availableRooms", availableRooms);
         model.addAttribute("checkInDate", checkInDate);
         model.addAttribute("checkOutDate", checkOutDate);
@@ -112,8 +115,8 @@ public class ReservationController {
              LocalDate checkInDate = (LocalDate) session.getAttribute("checkin-date");
              LocalDate checkOutDate = (LocalDate) session.getAttribute("checkout-date");
 
-        Room room = roomService.getRoomByName(roomName);
-
+            Room room = roomService.getRoomByName(roomName);
+            Long totalPrice = roomService.getTotalPrice(room.getRoomId(), checkInDate, checkOutDate);
             model.addAttribute("roomType", roomType);
             model.addAttribute("roomName", roomName);
             model.addAttribute("price", price);
@@ -121,6 +124,7 @@ public class ReservationController {
             model.addAttribute("checkOutDate", checkOutDate);
             model.addAttribute("adults", adults);
             model.addAttribute("roomId", room.getRoomId());
+            model.addAttribute("totalPrice", totalPrice);
             return "reservation/detail";
     }
 
