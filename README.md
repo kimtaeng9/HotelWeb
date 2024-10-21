@@ -37,3 +37,10 @@
 ### 검색 기능 강화(객실의 가격, 인원수, 객실 타입 등 필터 옵션 추가)
 ### 예약 상태별 필터링
 ### 성능 최적화
+## 상세
+#### 세션이 적용된 헤더 부분
+![image](https://github.com/user-attachments/assets/9178346d-2683-406b-ae54-9dfd298591d3)
+
+#### 예약 조회
+![image](https://github.com/user-attachments/assets/337cb0f6-530a-4f4a-891d-03991d405a4e)
+
